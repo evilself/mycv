@@ -4,7 +4,6 @@ import com.westernacher.mycv.model.User;
 import com.westernacher.mycv.model.UserRole;
 import com.westernacher.mycv.repository.UserRepository;
 import lombok.extern.slf4j.Slf4j;
-import org.elasticsearch.common.util.set.Sets;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
