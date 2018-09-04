@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
-import { filter, map, tap } from 'rxjs/operators';
+import { Router, NavigationEnd } from '@angular/router';
+import { filter, map } from 'rxjs/operators';
 import { of } from 'rxjs';
 import { AuthService } from './auth/auth.service';
 
@@ -12,14 +12,14 @@ import { AuthService } from './auth/auth.service';
 export class AppComponent implements OnInit {
   private navigation = new Map([
     [
-      '/mycv',
-      { path: '/mycv', title: 'My CV', icon: 'assignment_ind', sidebar: true }
+      '/cv/my',
+      { path: '/cv/my', title: 'My CV', icon: 'assignment_ind', sidebar: true }
     ],
     [
-      '/allcv',
-      { path: '/allcv', title: `All CV's`, icon: 'all_inbox', sidebar: true }
+      '/cv/all',
+      { path: '/cv/all', title: `All CV's`, icon: 'all_inbox', sidebar: true }
     ],
-    ['/login', { path: '/login', title: 'Login', sidebar: false }]
+    ['/login', { path: '/login', title: 'Login', menu: false }]
   ]);
 
   public title$ = this.router.events.pipe(
@@ -33,7 +33,7 @@ export class AppComponent implements OnInit {
   );
 
   public navigationItems$ = of(
-    [...this.navigation.values()].filter(v => !!v.sidebar)
+    [...this.navigation.values()].filter(v => v.sidebar)
   );
 
   constructor(public router: Router, public auth: AuthService) {}
