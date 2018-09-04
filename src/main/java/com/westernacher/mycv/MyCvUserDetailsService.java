@@ -30,24 +30,17 @@ public class MyCvUserDetailsService implements UserDetailsService {
     @Transactional
     public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
         User                   user        = userRepository.findByUserName(userName);
-        List<GrantedAuthority> authorities = getUserAuthority(Sets.newHashSet(user.getRole()));
+        List<GrantedAuthority> authorities = getUserAuthority(user.getRoles());
         return buildUserForAuthentication(user, authorities);
     }
-//    @Override
-//    @Transactional
-//    public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
-//        User user = userRepository.findByEmail(userName);
-//        List<GrantedAuthority> authorities = getUserAuthority(user.getRoles());
-//        return buildUserForAuthentication(user, authorities);
-//    }
 
     private List<GrantedAuthority> getUserAuthority(Set<UserRole> userRoles) {
-        Set<GrantedAuthority> roles = new HashSet<GrantedAuthority>();
+        Set<GrantedAuthority> roles = new HashSet<>();
         for (UserRole role : userRoles) {
             roles.add(new SimpleGrantedAuthority(role.name()));
         }
 
-        List<GrantedAuthority> grantedAuthorities = new ArrayList<GrantedAuthority>(roles);
+        List<GrantedAuthority> grantedAuthorities = new ArrayList<>(roles);
         return grantedAuthorities;
     }
 

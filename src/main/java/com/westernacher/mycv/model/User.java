@@ -6,30 +6,36 @@ import lombok.EqualsAndHashCode;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import javax.persistence.Id;
+import javax.validation.constraints.NotNull;
+import java.util.Set;
 
 @Document
 @Data
 @EqualsAndHashCode
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class User{
-
     @Id
     private String id;
 
+    @NotNull
     private String firstName;
 
+    @NotNull
     private String lastName;
 
+    @NotNull
     private String userName;
 
+    @NotNull
     private String password;
 
-    private UserRole role;
+    @NotNull
+    private Set<UserRole> roles;
 
-    public User(String firstName, String lastName, UserRole role, String userName, String password) {
+    public User(String firstName, String lastName, Set<UserRole> roles, String userName, String password) {
         this.firstName = firstName;
         this.lastName = lastName;
-        this.role = role;
+        this.roles = roles;
         this.userName = userName;
         this.password = password;
     }
