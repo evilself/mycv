@@ -1,0 +1,14 @@
+<mat-sidenav-container>
+  <mat-sidenav #sidenav>
+    <button *ngFor="let item of navigationItems$ | async" (click)="router.navigate([item.path]); sidenav.close();" mat-button>
+      <mat-icon>{{ item.icon }}</mat-icon>
+      {{ item.title }}</button>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <mat-toolbar color="primary" class="mat-elevation-z6">
+      <button *ngIf="auth.isAuthenticated()" class="menu-button" (click)="sidenav.toggle()" mat-icon-button><mat-icon>menu</mat-icon></button>
+      {{ title$ | async }}
+    </mat-toolbar>
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>
