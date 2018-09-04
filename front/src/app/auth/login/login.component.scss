@@ -1,0 +1,26 @@
+.container {
+  height: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+form {
+  max-width: 400px;
+}
+
+.button {
+  width: 50%;
+  margin: 8px auto;
+  display: block;
+  height: 48px;
+  font-size: 16px;
+
+  .mat-progress-spinner {
+    margin: 0 auto;
+  }
+}
+
+.mat-form-field {
+  width: 100%;
+}

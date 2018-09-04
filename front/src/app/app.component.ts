@@ -39,4 +39,10 @@ export class AppComponent implements OnInit {
   constructor(public router: Router, public auth: AuthService) {}
 
   ngOnInit(): void {}
+
+  logout() {
+    this.auth.logout().then(() => {
+      this.router.navigate(['/login']);
+    });
+  }
 }

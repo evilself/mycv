@@ -4,9 +4,25 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class AuthService {
+  public isAuthenticated = false;
+
   constructor() {}
 
-  public isAuthenticated(): boolean {
-    return true;
+  login(email: string, password: string) {
+    return new Promise((resolve, reject) => {
+      setTimeout(() => {
+        this.isAuthenticated = true;
+        if (this.isAuthenticated) {
+          resolve();
+        } else {
+          reject({ message: 'bad credentials' });
+        }
+      }, 500);
+    });
+  }
+
+  logout() {
+    this.isAuthenticated = false;
+    return Promise.resolve(true);
   }
 }
