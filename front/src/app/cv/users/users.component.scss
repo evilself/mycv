@@ -1,0 +1,47 @@
+.search-container {
+  min-height: 64px;
+  padding: 8px 24px 0;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.table-container {
+  display: flex;
+  flex-direction: column;
+  min-width: 300px;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.mat-form-field {
+  font-size: 14px;
+  width: 100%;
+}
+
+.mat-table {
+  overflow: auto;
+  max-height: 400px;
+}
+
+.mat-row {
+  cursor: pointer;
+
+  &.active {
+    background-color: rgba(0,0,0,.12);
+  }
+}
+
+.mat-column-dateOfBirth {
+  max-width: 80px;
+}
+
+.mat-progress-bar {
+  height: 3px;
+}
+
+.table-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  position: relative;
+}

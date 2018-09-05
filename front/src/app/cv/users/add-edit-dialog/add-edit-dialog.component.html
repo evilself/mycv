@@ -1,0 +1,21 @@
+<form [formGroup]="userForm" (ngSubmit)="onSubmit(userForm.value)">
+  <mat-form-field>
+    <input type="text" formControlName="firstName" matInput placeholder="First name">
+  </mat-form-field>
+  <mat-form-field>
+    <input type="text" formControlName="lastName" matInput placeholder="Last name">
+  </mat-form-field>
+  <mat-form-field>
+    <input type="email" formControlName="email" matInput placeholder="Email">
+  </mat-form-field>
+  <mat-form-field>
+    <input formControlName="dateOfBirth" matInput [matDatepicker]="picker" placeholder="Date of Birth">
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+  </mat-form-field>
+
+  <div class="form-actions">
+    <button [disabled]="!userForm.valid || userForm.pristine" color="primary" mat-raised-button>Save</button>
+    <button mat-dialog-close mat-button>Cancel</button>
+  </div>
+</form>

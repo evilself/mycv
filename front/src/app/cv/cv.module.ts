@@ -5,9 +5,10 @@ import { MyComponent } from './my/my.component';
 import { PreviewComponent } from './preview/preview.component';
 import { CvRoutingModule } from './cv-routing.module';
 import { MaterialModule } from '../material.module';
+import { UsersModule } from './users/users.module';
 
 @NgModule({
-  imports: [CommonModule, CvRoutingModule, MaterialModule],
+  imports: [CommonModule, CvRoutingModule, MaterialModule, UsersModule],
   declarations: [AllComponent, MyComponent, PreviewComponent]
 })
 export class CvModule {}

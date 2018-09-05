@@ -19,6 +19,10 @@ export class AppComponent implements OnInit {
       '/cv/all',
       { path: '/cv/all', title: `All CV's`, icon: 'all_inbox', sidebar: true }
     ],
+    [
+      '/cv/users',
+      { path: '/cv/users', title: `Users`, icon: 'all_inbox', sidebar: true }
+    ],
     ['/login', { path: '/login', title: 'Login', menu: false }]
   ]);
 
