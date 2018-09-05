@@ -10,6 +10,9 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityNotFoundException;
+import java.util.List;
+
 @Service
 public class DefaultUserService implements UserService {
 
@@ -32,5 +35,18 @@ public class DefaultUserService implements UserService {
     @PreAuthorize("hasAuthority('ADMIN')")
     public void deleteUsers() {
         this.userRepository.deleteAll();
+    }
+
+    @Override
+    @PreAuthorize("hasAuthority('ADMIN')")
+    public List<User> getAllUsers() {
+        return this.userRepository.findAll();
+    }
+
+    @Override
+    //IF ADMIN or if yourself
+    @PreAuthorize("hasAuthority('ADMIN')")
+    public User getUserById(String id) {
+        return this.userRepository.findById(id).orElseThrow(() -> new EntityNotFoundException(id));
     }
 }

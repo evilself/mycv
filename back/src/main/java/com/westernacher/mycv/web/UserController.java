@@ -20,19 +20,16 @@ import java.util.List;
 public class UserController {
 
     @Autowired
-    UserRepository userRepository;
-
-    @Autowired
     UserService userService;
 
     @GetMapping
     public ResponseEntity getUsers() {
-        return new ResponseEntity(this.userRepository.findAll(), HttpStatus.OK);
+        return new ResponseEntity(this.userService.getAllUsers(), HttpStatus.OK);
     }
 
     @GetMapping(value = "/{id}")
     public ResponseEntity getUser(@PathVariable String id) {
-        return new ResponseEntity(this.userRepository.findById(id), HttpStatus.OK);
+        return new ResponseEntity(this.userService.getUserById(id), HttpStatus.OK);
     }
 
     //TODO delete me
