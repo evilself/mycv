@@ -6,15 +6,15 @@ import com.google.common.collect.ImmutableList;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DB;
 import com.mongodb.DBCollection;
-import com.westernacher.mycv.NoSecurityConfig;
+import com.westernacher.mycv.security.NoSecurityConfig;
+import com.westernacher.mycv.security.PasswordEncoderConfig;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 @ChangeLog
 @Slf4j
 public class DatabaseChangelog {
-
-    private PasswordEncoder passwordEncoder = new NoSecurityConfig().customPasswordEncoder();
+    private PasswordEncoder passwordEncoder = new PasswordEncoderConfig().customPasswordEncoder();
 
     @ChangeSet(id = "create_users", author = "pavel", order = "0001")
     public void createUsers(DB db) {

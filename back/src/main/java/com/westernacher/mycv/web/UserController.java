@@ -31,7 +31,7 @@ public class UserController {
     }
 
     @GetMapping(value = "/{id}")
-    public ResponseEntity getUsers(@PathVariable String id) {
+    public ResponseEntity getUser(@PathVariable String id) {
         return new ResponseEntity(this.userRepository.findById(id), HttpStatus.OK);
     }
 
@@ -45,10 +45,9 @@ public class UserController {
 
     //TODO delete me
     @GetMapping(value = "/deleteall")
-    @PreAuthorize("hasRole('ADMIN')")
     @ResponseStatus(value = HttpStatus.NO_CONTENT)
     public String deleteall() {
-        this.userRepository.deleteAll();
+        this.userService.deleteUsers();
         return "redirect:/users";
     }
 }

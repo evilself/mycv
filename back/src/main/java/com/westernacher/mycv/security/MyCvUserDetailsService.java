@@ -1,10 +1,11 @@
-package com.westernacher.mycv;
+package com.westernacher.mycv.security;
 
 import com.westernacher.mycv.model.User;
 import com.westernacher.mycv.model.UserRole;
 import com.westernacher.mycv.repository.UserRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Primary;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -18,12 +19,18 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+@Primary
 @Service
 @Slf4j
 public class MyCvUserDetailsService implements UserDetailsService {
 
     @Autowired
-    UserRepository userRepository;
+    private UserRepository userRepository;
+
+//    @Autowired
+//    public MyCvUserDetailsService(UserRepository userRepository) {
+//        this.userRepository = userRepository;
+//    }
 
     @Override
     @Transactional
