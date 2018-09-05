@@ -2,9 +2,9 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 
 import { ActionsComponent } from './actions.component';
-import { MaterialsModule } from '../material.modules';
 import { DebugElement } from '@angular/core';
 import { User } from '../users.interfaces';
+import { MaterialModule } from '../../../material.module';
 
 export const testUser = {
   id: 0,
@@ -24,10 +24,9 @@ describe('ActionsComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [ MaterialsModule ],
-      declarations: [ ActionsComponent ]
-    })
-    .compileComponents();
+      imports: [MaterialModule],
+      declarations: [ActionsComponent]
+    }).compileComponents();
   }));
 
   beforeEach(() => {

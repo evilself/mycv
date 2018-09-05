@@ -1,10 +1,10 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { PaginatorComponent } from './paginator.component';
-import { MaterialsModule } from '../material.modules';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
+import { MaterialModule } from '../../../material.module';
 
 describe('PaginatorComponent', () => {
   let component: PaginatorComponent;
@@ -15,10 +15,9 @@ describe('PaginatorComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [ MaterialsModule, BrowserAnimationsModule ],
-      declarations: [ PaginatorComponent ]
-    })
-    .compileComponents();
+      imports: [MaterialModule, BrowserAnimationsModule],
+      declarations: [PaginatorComponent]
+    }).compileComponents();
   }));
 
   beforeEach(() => {
@@ -44,7 +43,9 @@ describe('PaginatorComponent', () => {
   it('should have an element that shows the current page', () => {
     const pageInfo = fixture.debugElement.query(By.css('.page-info'));
     expect(pageInfo).toBeDefined();
-    expect(pageInfo.nativeElement.textContent).toBe(`Page ${component.currentPage + 1} of ${component.totalPages}`);
+    expect(pageInfo.nativeElement.textContent).toBe(
+      `Page ${component.currentPage + 1} of ${component.totalPages}`
+    );
   });
 
   it('should have two buttons for prev/next page', () => {

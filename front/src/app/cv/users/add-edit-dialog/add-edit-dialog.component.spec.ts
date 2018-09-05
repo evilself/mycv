@@ -1,12 +1,11 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { AddEditDialogComponent } from './add-edit-dialog.component';
-import { MaterialsModule } from '../material.modules';
-import { FormBuilder, } from '@angular/forms';
+import { FormBuilder } from '@angular/forms';
 import { UsersModule } from '../users.module';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 import { DebugElement } from '@angular/core';
 import { By } from '@angular/platform-browser';
-
+import { MaterialModule } from '../../../material.module';
 
 export const emptyTestUser = {
   dateOfBirth: '',
@@ -35,7 +34,7 @@ describe('AddEditDialogComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [ MaterialsModule, UsersModule ],
+      imports: [MaterialModule, UsersModule],
       providers: [
         FormBuilder,
         { provide: MAT_DIALOG_DATA, useValue: {} },
@@ -44,8 +43,7 @@ describe('AddEditDialogComponent', () => {
           useValue: dialogMock
         }
       ]
-    })
-    .compileComponents();
+    }).compileComponents();
   }));
 
   beforeEach(() => {
@@ -72,9 +70,15 @@ describe('AddEditDialogComponent', () => {
     component.data = emptyTestUser;
     component.ngOnInit();
     fixture.detectChanges();
-    expect(component.userForm.controls['firstName'].value).toEqual(emptyTestUser.firstName);
-    expect(component.userForm.controls['lastName'].value).toEqual(emptyTestUser.lastName);
-    expect(component.userForm.controls['email'].value).toEqual(emptyTestUser.email);
+    expect(component.userForm.controls['firstName'].value).toEqual(
+      emptyTestUser.firstName
+    );
+    expect(component.userForm.controls['lastName'].value).toEqual(
+      emptyTestUser.lastName
+    );
+    expect(component.userForm.controls['email'].value).toEqual(
+      emptyTestUser.email
+    );
     expect(component.userForm.controls['dateOfBirth'].value).toBeDefined();
   });
 
@@ -82,8 +86,12 @@ describe('AddEditDialogComponent', () => {
     component.data = testUser;
     component.ngOnInit();
     fixture.detectChanges();
-    expect(component.userForm.controls['firstName'].value).toEqual(testUser.firstName);
-    expect(component.userForm.controls['lastName'].value).toEqual(testUser.lastName);
+    expect(component.userForm.controls['firstName'].value).toEqual(
+      testUser.firstName
+    );
+    expect(component.userForm.controls['lastName'].value).toEqual(
+      testUser.lastName
+    );
     expect(component.userForm.controls['email'].value).toEqual(testUser.email);
     expect(component.userForm.controls['dateOfBirth'].value).toBeDefined();
   });

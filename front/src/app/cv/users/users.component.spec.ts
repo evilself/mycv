@@ -1,15 +1,15 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { UsersComponent } from './users.component';
-import { MaterialsModule } from './material.modules';
 import { UsersService } from './users.service';
 import { MatDialog, MatSnackBar } from '@angular/material';
 import { UsersModule } from './users.module';
 import { By } from '@angular/platform-browser';
-import { Observable } from 'rxjs/Observable';
+import { Observable, of } from 'rxjs';
 import { fakeGetAll } from './users.service.spec';
 import 'rxjs/add/observable/of';
 import { DebugElement } from '@angular/core';
+import { MaterialModule } from '../../material.module';
 
 export const dialogMock = {
   open: () => {},
@@ -17,7 +17,7 @@ export const dialogMock = {
 };
 
 const userServiceStub = {
-  getAll: () => Observable.of(fakeGetAll()),
+  getAll: () => of(fakeGetAll()),
   getById: () => {},
   addUser: () => {},
   updateUser: () => {},
@@ -36,14 +36,13 @@ describe('UsersComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [ MaterialsModule, UsersModule ],
+      imports: [MaterialModule, UsersModule],
       providers: [
         { provide: UsersService, useValue: userServiceStub },
         { provide: MatDialog, useValue: dialogMock },
         { provide: MatSnackBar, useValue: {} }
       ]
-    })
-    .compileComponents();
+    }).compileComponents();
   }));
 
   beforeEach(() => {
@@ -87,7 +86,6 @@ describe('UsersComponent', () => {
   });
 
   describe('users table', () => {
-
     it('should have mat-table for users', () => {
       expect(tableEl).toBeTruthy();
     });
@@ -98,22 +96,32 @@ describe('UsersComponent', () => {
     });
 
     it('should have first name column', () => {
-      expect(tableEl.children[0].children[0].nativeElement.textContent).toBe('First Name');
+      expect(tableEl.children[0].children[0].nativeElement.textContent).toBe(
+        'First Name'
+      );
     });
 
     it('should have last name column', () => {
-      expect(tableEl.children[0].children[1].nativeElement.textContent).toBe('Last Name');
+      expect(tableEl.children[0].children[1].nativeElement.textContent).toBe(
+        'Last Name'
+      );
     });
 
     it('should have email column', () => {
-      expect(tableEl.children[0].children[2].nativeElement.textContent).toBe('Email');
+      expect(tableEl.children[0].children[2].nativeElement.textContent).toBe(
+        'Email'
+      );
     });
 
     it('should have date of birth column', () => {
-      expect(tableEl.children[0].children[3].nativeElement.textContent).toBe('Date of birth');
+      expect(tableEl.children[0].children[3].nativeElement.textContent).toBe(
+        'Date of birth'
+      );
     });
 
-    it(`should have a row for every user (${fakeGetAll().content.length} test users)`, (done: DoneFn) => {
+    it(`should have a row for every user (${
+      fakeGetAll().content.length
+    } test users)`, (done: DoneFn) => {
       component.query$.subscribe(() => {
         fixture.detectChanges();
         tableRows = fixture.debugElement.queryAll(By.css('mat-row'));
@@ -129,7 +137,9 @@ describe('UsersComponent', () => {
         tableRows = fixture.debugElement.queryAll(By.css('mat-row'));
         tableRows[0].triggerEventHandler('click', null);
         fixture.detectChanges();
-        expect(component.selectRow).toHaveBeenCalledWith(fakeGetAll().content[0]);
+        expect(component.selectRow).toHaveBeenCalledWith(
+          fakeGetAll().content[0]
+        );
         done();
       });
     });
@@ -153,10 +163,14 @@ describe('UsersComponent', () => {
       component.showUserActions$.next(true);
       component.selectedUser$.next(fakeGetAll().content[0]);
       fixture.detectChanges();
-      expect(appActions.children[0].children[0].nativeElement.textContent).toContain('edit');
+      expect(
+        appActions.children[0].children[0].nativeElement.textContent
+      ).toContain('edit');
       appActions.children[0].children[0].triggerEventHandler('click', null);
       fixture.detectChanges();
-      expect(component.openAddEditDialog).toHaveBeenCalledWith(fakeGetAll().content[0]);
+      expect(component.openAddEditDialog).toHaveBeenCalledWith(
+        fakeGetAll().content[0]
+      );
     });
 
     it('should open confirm delete dialog', () => {
@@ -164,10 +178,14 @@ describe('UsersComponent', () => {
       component.showUserActions$.next(true);
       component.selectedUser$.next(fakeGetAll().content[0]);
       fixture.detectChanges();
-      expect(appActions.children[0].children[1].nativeElement.textContent).toContain('delete');
+      expect(
+        appActions.children[0].children[1].nativeElement.textContent
+      ).toContain('delete');
       appActions.children[0].children[1].triggerEventHandler('click', null);
       fixture.detectChanges();
-      expect(component.confirmDeleteDialog).toHaveBeenCalledWith(fakeGetAll().content[0]);
+      expect(component.confirmDeleteDialog).toHaveBeenCalledWith(
+        fakeGetAll().content[0]
+      );
     });
   });
 
