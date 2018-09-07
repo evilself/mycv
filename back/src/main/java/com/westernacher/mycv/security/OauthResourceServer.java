@@ -30,6 +30,10 @@ public class OauthResourceServer extends ResourceServerConfigurerAdapter {
 //            .anyRequest().access(SECURED_READ_SCOPE).and().logout().logoutUrl("/oauth/logout");
 
         http
+            .sessionManagement()
+            .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+            .and()
+            .requestCache().requestCache(new NullRequestCache()).and()
             .requestMatchers()
             .antMatchers(SECURED_PATTERN).and().authorizeRequests()
             .anyRequest().access(SECURED_READ_SCOPE);
