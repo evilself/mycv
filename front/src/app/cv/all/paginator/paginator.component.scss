@@ -1,0 +1,15 @@
+.paginator-container {
+  padding-top: 8px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: baseline;
+
+  .page-info {
+    color: rgba(0, 0, 0, 0.54);
+    font-size: 12px;
+  }
+
+  div {
+    margin: 8px;
+  }
+}
