@@ -67,7 +67,8 @@ public class OauthAuthzServer extends AuthorizationServerConfigurerAdapter {
     }
     @Override
     public void configure(AuthorizationServerEndpointsConfigurer endpoints) {
-        endpoints.tokenStore(tokenStore()).authenticationManager(authenticationManager).userDetailsService(userDetailsService);
+        endpoints.tokenStore(tokenStore()).authenticationManager(authenticationManager).userDetailsService(userDetailsService)
+                 .tokenEnhancer(new CustomToken());
     }
 
     @Bean

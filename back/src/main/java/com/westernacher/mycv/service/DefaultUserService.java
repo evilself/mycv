@@ -44,8 +44,7 @@ public class DefaultUserService implements UserService {
     }
 
     @Override
-    //IF ADMIN or if yourself
-    @PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("hasAuthority('ADMIN') || @securityUtil.isItMe(#id)")
     public User getUserById(String id) {
         return this.userRepository.findById(id).orElseThrow(() -> new EntityNotFoundException(id));
     }
