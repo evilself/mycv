@@ -18,19 +18,25 @@ import java.util.List;
 @Document
 public class Cv {
 
-    private User createdBy;
-
     @Id
     private String id;
+
+    private User createdBy;
 
     private String firstName;
 
     private String lastName;
 
-    private String objective;
+    private String summary;
 
     private List<Experience> experienceList;
 
     private List<Skill> skillList;
+
+    private Education education;
+
+    private List<Language> languageList;
+
+    private List<Certificate> certificateList;
 
 }

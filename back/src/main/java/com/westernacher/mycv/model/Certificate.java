@@ -7,25 +7,22 @@ import lombok.Setter;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import javax.persistence.Id;
-import java.time.LocalDate;
-import java.util.List;
 
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @Setter
 @Document
-public class Experience {
-
+public class Certificate {
     @Id
     private String id;
 
-    private String company;
-    private String title;
-    private List<Skill> skills;
-    private String description;
-    private LocalDate startDate;
-    private LocalDate endDate;
-    private boolean stillEmployed;
+    private String certificate;
 
+    private String details;
+
+    public Certificate(String certificate, String details) {
+        this.certificate = certificate;
+        this.details = details;
+    }
 }
