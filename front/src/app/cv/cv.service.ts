@@ -18,12 +18,14 @@ export class CVsService {
         of({
           content: [
             {
+              id: 1,
               dateOfBirth: '10.10.2015',
               email: 'asdasd@asdasd',
               firstName: 'ASdasd',
               lastName: 'dsadas'
             },
             {
+              id: 2,
               dateOfBirth: '11.11.111',
               email: 'qweqw@asdasd.asd',
               firstName: 'sadas',
