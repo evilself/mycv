@@ -6,31 +6,24 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
-import java.util.List;
+import java.time.LocalDate;
 
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @Setter
 @Document
-public class Cv {
-
-    private User createdBy;
+public class Experience {
 
     @Id
     private String id;
 
-    private String firstName;
-
-    private String lastName;
-
-    private String objective;
-
-    private List<Experience> experienceList;
-
-    private List<Skill> skillList;
+    private String company;
+    private String companyAddress;
+    private String description;
+    private LocalDate startDate;
+    private LocalDate endDate;
+    private boolean stillEmployed;
 
 }
