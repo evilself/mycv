@@ -1,3 +1,89 @@
-<p>
-  my works!
-</p>
+<div [@containerState]="!!(myData$ | async)" class="container">
+  <div name="nameRow" class="row">
+    <div class="column">
+      <div class="item">
+        <h1>{{ (myData$ | async)?.firstName }} {{ (myData$ | async)?.lastName }}</h1>
+      </div>
+    </div>
+    <div class="column">
+      <div class="item">
+        <mat-form-field>
+          <input matInput placeholder="First name" [value]="(myData$ | async)?.firstName">
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="Last name" [value]="(myData$ | async)?.lastName">
+        </mat-form-field>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="column">
+      <div class="item">
+        <h2>Summary</h2>
+      </div>
+    </div>
+    <div class="column">
+      <div class="item">
+        <textarea matInput name="summary" placeholder="Summary" rows="5"></textarea>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="column">
+      <div class="item">
+        <h3>Projects / Personal experience</h3>
+        <button mat-button>
+          <mat-icon>add</mat-icon> Add new experience
+        </button>
+      </div>
+    </div>
+    <div class="column">
+      <div class="item">
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="column">
+      <div class="item">
+        <h3>Education</h3>
+        <button mat-button>
+          <mat-icon>add</mat-icon> Add new education
+        </button>
+      </div>
+    </div>
+    <div class="column">
+      <div class="item"></div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="column">
+      <div class="item">
+        <h3>Languages</h3>
+        <button mat-button>
+          <mat-icon>add</mat-icon> Add new language
+        </button>
+      </div>
+    </div>
+    <div class="column">
+      <div class="item"></div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="column">
+      <div class="item">
+        <h3>Certificates</h3>
+        <button mat-button>
+          <mat-icon>add</mat-icon> Add new certificate
+        </button>
+      </div>
+    </div>
+    <div class="column">
+      <div class="item"></div>
+    </div>
+  </div>
+</div>

@@ -1,16 +1,25 @@
 <mat-sidenav-container>
   <mat-sidenav #sidenav>
-    <button *ngFor="let item of navigationItems$ | async" (click)="router.navigate([item.path]); sidenav.close();" mat-button
-      color="item.color">
+    <button *ngFor="let item of navigationItems$ | async" (click)="router.navigate([item.path]); sidenav.close();"
+      mat-button color="item.color">
       <mat-icon>{{ item.icon }}</mat-icon>
-      {{ item.title }}</button>
-    <button color="accent" (click)="logout(); sidenav.close();" mat-button><mat-icon>exit_to_app</mat-icon> Logout</button>
+      {{ item.title }}
+    </button>
+    <button color="accent" (click)="logout(); sidenav.close();" mat-button>
+      <mat-icon>exit_to_app</mat-icon> Logout
+    </button>
   </mat-sidenav>
   <mat-sidenav-content>
     <mat-toolbar color="primary" class="mat-elevation-z6">
-      <button *ngIf="auth.isAuthenticated" class="menu-button" (click)="sidenav.toggle()" mat-icon-button><mat-icon>menu</mat-icon></button>
+      <button *ngIf="auth.isAuthenticated" class="menu-button" (click)="sidenav.toggle()" mat-icon-button>
+        <mat-icon>menu</mat-icon>
+      </button>
       {{ title$ | async }}
     </mat-toolbar>
+    <div *ngIf="loading$ | async" class="loader">
+      <mat-progress-bar color="accent" mode="indeterminate"></mat-progress-bar>
+      <mat-spinner color="accent" diameter="30"></mat-spinner>
+    </div>
     <router-outlet></router-outlet>
   </mat-sidenav-content>
 </mat-sidenav-container>

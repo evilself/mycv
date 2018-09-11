@@ -5,7 +5,6 @@
 </div>
 
 <div class="table-container mat-elevation-z8">
-  <mat-progress-bar [style.opacity]="(isLoading$ | async) ? '1' : '0'" mode="indeterminate"></mat-progress-bar>
 
   <mat-table [dataSource]="dataSource" matSort (matSortChange)="sortData($event)">
     <ng-container matColumnDef="firstName">
@@ -21,11 +20,7 @@
     <ng-container matColumnDef="actions">
       <mat-header-cell *matHeaderCellDef mat-sort-header></mat-header-cell>
       <mat-cell *matCellDef="let row">
-        <app-actions
-          [data]="row"
-          [showUserActions]="true"
-          (addEditUser)="navigateToAddEdit($event)"
-          (deleteUser)="confirmDeleteDialog($event)">
+        <app-actions [data]="row" [showUserActions]="true" (addEditUser)="navigateToAddEdit($event)" (deleteUser)="confirmDeleteDialog($event)">
         </app-actions>
       </mat-cell>
     </ng-container>

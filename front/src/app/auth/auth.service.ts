@@ -8,6 +8,10 @@ export class AuthService {
 
   constructor() {}
 
+  authToken() {
+    return '111111';
+  }
+
   login(email: string, password: string) {
     return new Promise((resolve, reject) => {
       setTimeout(() => {

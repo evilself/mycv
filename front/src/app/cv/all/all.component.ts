@@ -24,16 +24,12 @@ import {
   styleUrls: ['./all.component.scss']
 })
 export class AllComponent implements AfterViewInit {
-
   private sorting$ = new BehaviorSubject('firstName,desc');
   public isLoading$ = new BehaviorSubject(false);
   private resetQ$ = new BehaviorSubject(0);
   public showUserActions$ = new BehaviorSubject(false);
 
-  public query$ = combineLatest(
-    this.sorting$,
-    this.resetQ$
-  ).pipe(
+  public query$ = combineLatest(this.sorting$, this.resetQ$).pipe(
     tap(() => {
       this.isLoading$.next(true);
     }),
@@ -112,8 +108,5 @@ export class AllComponent implements AfterViewInit {
       );
   }
 
-  navigateToAddEdit(data: CVListItem) {
-
-  }
+  navigateToAddEdit(data: CVListItem) {}
 }
-
