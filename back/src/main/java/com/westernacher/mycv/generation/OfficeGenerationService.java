@@ -76,7 +76,7 @@ public class OfficeGenerationService implements GenerationService {
             // create byte buffer
             byte[] buffer = new byte[1024];
 
-            FileOutputStream fos = new FileOutputStream(zipFile);
+            ByteArrayOutputStream fos = new ByteArrayOutputStream();
 
             ZipOutputStream zos = new ZipOutputStream(fos);
 
@@ -114,7 +114,8 @@ public class OfficeGenerationService implements GenerationService {
             // close the ZipOutputStream
             zos.close();
 
-            InputStream         stream              = new FileInputStream(new File("./CvList.zip"));
+            //InputStream         stream              = new FileInputStream(new File("./CvList.zip"));
+            InputStream         stream              = new ByteArrayInputStream(fos.toByteArray());
             Resource inputStreamResource = new InputStreamResource(stream);
             return  inputStreamResource;
 
