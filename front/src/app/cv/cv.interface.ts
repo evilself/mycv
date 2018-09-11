@@ -1,5 +1,5 @@
 export interface CVListItem {
-  id: number;
+  id: string;
   firstName: string;
   lastName: string;
   email: string;

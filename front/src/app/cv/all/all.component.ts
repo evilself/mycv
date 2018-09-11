@@ -1,4 +1,5 @@
 import { Component, AfterViewInit } from '@angular/core';
+import { Router } from '@angular/router';
 import {
   MatTableDataSource,
   MatDialog,
@@ -50,7 +51,8 @@ export class AllComponent implements AfterViewInit {
   constructor(
     private dialog: MatDialog,
     private snackBar: MatSnackBar,
-    private cvsService: CVsService
+    private cvsService: CVsService,
+    private router: Router
   ) {
     console.log('iiniit');
   }
@@ -108,5 +110,11 @@ export class AllComponent implements AfterViewInit {
       );
   }
 
-  navigateToAddEdit(data: CVListItem) {}
+  navigateToAddEdit(data: CVListItem) {
+
+  }
+
+  navigateToPreview(data: CVListItem) {
+    this.router.navigate(['cv', 'preview', data.id]);
+  }
 }

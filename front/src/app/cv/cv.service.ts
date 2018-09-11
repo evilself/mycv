@@ -48,8 +48,18 @@ export class CVsService {
     );
   }
 
-  getById(id: number) {
-    return this.http.get(`${this.apiUrl}/${id}`);
+  getById(id: string) {
+    return this.http.get(`${this.apiUrl}/${id}`).pipe(
+      catchError(() =>
+        of({
+          id: 3,
+          dateOfBirth: '11.11.111',
+          firstName: 'Zdravko',
+          lastName: 'Tatarski',
+          email: 'zdravko.tatarski@westernacher.com'
+        }).pipe(delay(2000))
+      )
+    );
   }
 
   delete(cvData: CVListItem) {

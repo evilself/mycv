@@ -26,7 +26,7 @@
     </ng-container>
 
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-    <mat-row [ngClass]="{'active':  row.active}" *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    <mat-row (click)="navigateToPreview(row)" [ngClass]="{'active':  row.active}" *matRowDef="let row; columns: displayedColumns;"></mat-row>
   </mat-table>
 
   <div class="table-footer">

@@ -1,3 +1,82 @@
-<p>
-  preview works!
-</p>
+<div [@containerState]="!!(previewData$ | async)" class="container">
+  <div name="nameRow" class="row">
+    <div class="column">
+      <div class="item">
+        <h1>{{ (previewData$ | async)?.firstName }} {{ (previewData$ | async)?.lastName }}</h1>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="column">
+      <div class="item">
+        <h2>Summary</h2>
+      </div>
+    </div>
+    <div class="column">
+      <div class="item">
+        {{ (previewData$ | async)?.summary }}
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="column">
+      <div class="item">
+        <h3>Projects / Personal experience</h3>
+      </div>
+    </div>
+    <div class="column">
+      <div class="item">
+        <div *ngFor="let project of (previewData$ | async)?.projects">
+          {{ project }}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="column">
+      <div class="item">
+        <h3>Education</h3>
+      </div>
+    </div>
+    <div class="column">
+      <div class="item">
+        <div *ngFor="let education of (previewData$ | async)?.education">
+          {{ education }}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="column">
+      <div class="item">
+        <h3>Languages</h3>
+      </div>
+    </div>
+    <div class="column">
+      <div class="item">
+        <div *ngFor="let language of (previewData$ | async)?.languages">
+          {{ language }}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="column">
+      <div class="item">
+        <h3>Certificates</h3>
+      </div>
+    </div>
+    <div class="column">
+      <div class="item">
+        <div *ngFor="let certificate of (previewData$ | async)?.certificates">
+          {{ certificate }}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

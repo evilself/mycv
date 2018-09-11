@@ -1,0 +1,9 @@
+.table-container, .search-container {
+  margin: 0 15%;
+}
+
+@media all and (max-width: 1200px) {
+  .table-container, .search-container {
+    padding: 0 2.5%;
+  }
+}

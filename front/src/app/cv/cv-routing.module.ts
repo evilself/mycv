@@ -19,7 +19,7 @@ const routes: Routes = [
     component: MyComponent
   },
   {
-    path: 'preview',
+    path: 'preview/:id',
     component: PreviewComponent
   }
 ];
