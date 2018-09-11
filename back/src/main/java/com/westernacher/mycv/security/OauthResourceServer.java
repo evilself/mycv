@@ -29,7 +29,7 @@ public class OauthResourceServer extends ResourceServerConfigurerAdapter {
 //            //.antMatchers(HttpMethod.POST, SECURED_PATTERN).access(SECURED_WRITE_SCOPE)
 //            .anyRequest().access(SECURED_READ_SCOPE).and().logout().logoutUrl("/oauth/logout");
 
-        http
+        http.csrf().disable()
             .sessionManagement()
             .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
             .and()

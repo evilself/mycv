@@ -16,4 +16,8 @@ public interface CVService {
     void deleteAllCv();
 
     Cv getById(String id);
+
+    Cv createCv(Cv cv);
+
+    Cv getMyCv();
 }

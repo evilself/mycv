@@ -4,9 +4,11 @@ import com.google.common.collect.Lists;
 import com.westernacher.mycv.model.*;
 import com.westernacher.mycv.repository.CvRepository;
 import com.westernacher.mycv.repository.UserRepository;
+import com.westernacher.mycv.security.SecurityUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
@@ -23,6 +25,9 @@ public class DefaultCvService implements CVService {
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private SecurityUtil securityUtil;
 
     @Override
     @PreAuthorize("hasAuthority('ADMIN')")
@@ -86,5 +91,20 @@ public class DefaultCvService implements CVService {
     @Override
     public Cv getById(String id) {
         return this.cvRepository.findById(id).orElseThrow(()->new EntityNotFoundException());
+    }
+
+    @Override
+    public Cv createCv(Cv cv) {
+        Cv existingCv = this.cvRepository.findByCreatedBy(securityUtil.getMycvUser());
+        if(existingCv != null) {
+            cv.setId(existingCv.getId());
+        }
+        cv.setCreatedBy(securityUtil.getMycvUser());
+        return this.cvRepository.save(cv);
+    }
+
+    @Override
+    public Cv getMyCv() { ;
+        return this.cvRepository.findByCreatedBy(securityUtil.getMycvUser());
     }
 }

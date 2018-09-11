@@ -1,5 +1,6 @@
 package com.westernacher.mycv.web;
 
+import com.westernacher.mycv.model.Cv;
 import com.westernacher.mycv.service.CVService;
 import com.westernacher.mycv.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +27,11 @@ public class CvController {
     @GetMapping(value = "/{id}")
     public ResponseEntity getCV(@PathVariable String id) {
         return new ResponseEntity(this.cvService.getById(id), HttpStatus.OK);
+    }
+
+    @PostMapping
+    public ResponseEntity createCV(@RequestBody Cv cv) {
+        return new ResponseEntity(this.cvService.createCv(cv), HttpStatus.OK);
     }
 
     //TODO delete me
