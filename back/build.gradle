@@ -41,11 +41,10 @@ dependencies {
 	compileOnly('org.projectlombok:lombok')
     compileOnly "org.springframework.boot:spring-boot-configuration-processor"
 	compile("com.github.mongobee:mongobee:0.13")
-
-//    compile(group: 'org.docx4j', name: 'docx4j', version: '3.3.5') {
-//        exclude module: "spring-boot-starter-logging"
-//        exclude module: "logback-classic"
-//    }
+    // https://mvnrepository.com/artifact/org.docx4j/docx4j
+    compile(group: 'org.docx4j', name: 'docx4j', version: '6.0.1') {
+        exclude group: "org.slf4j", module: "slf4j-log4j12"
+    }
 
 	testCompile('org.springframework.boot:spring-boot-starter-test')
 	testCompile('org.springframework.security:spring-security-test')

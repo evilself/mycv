@@ -1,12 +1,14 @@
 package com.westernacher.mycv.service;
 
 import com.google.common.collect.Lists;
+import com.westernacher.mycv.generation.GenerationService;
 import com.westernacher.mycv.model.*;
 import com.westernacher.mycv.repository.CvRepository;
 import com.westernacher.mycv.repository.UserRepository;
 import com.westernacher.mycv.security.SecurityUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.Resource;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
@@ -25,6 +27,9 @@ public class DefaultCvService implements CVService {
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private GenerationService generationService;
 
     @Autowired
     private SecurityUtil securityUtil;
@@ -91,6 +96,19 @@ public class DefaultCvService implements CVService {
     @Override
     public Cv getById(String id) {
         return this.cvRepository.findById(id).orElseThrow(()->new EntityNotFoundException());
+    }
+
+    //TODO add authZ only generate your CV or ADMIN
+    @Override
+    public Resource generateCvById(String id) throws Exception {
+        return this.generationService.generateWordCV(this.getById(id));
+    }
+
+    @Override
+    public Resource generateCvList(List<String> ids) throws Exception {
+        List<Cv> cvs = this.cvRepository.findAllByIdIn(ids);
+        return this.generationService.generateZipFromCvList(cvs);
+
     }
 
     @Override

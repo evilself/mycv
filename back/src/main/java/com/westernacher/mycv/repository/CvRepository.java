@@ -4,8 +4,12 @@ import com.westernacher.mycv.model.Cv;
 import com.westernacher.mycv.model.User;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
+import java.util.List;
+
 public interface CvRepository extends MongoRepository<Cv, String> {
 
     Cv findByCreatedBy(User user);
+
+    List<Cv> findAllByIdIn(List<String> ids);
 
 }
