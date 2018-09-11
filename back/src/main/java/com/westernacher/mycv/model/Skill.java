@@ -18,10 +18,9 @@ public class Skill {
     @Id
     private String id;
 
+    private String skill;
+
     public Skill(String skill) {
         this.skill = skill;
     }
-
-    private String skill;
-
 }

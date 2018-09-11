@@ -1,15 +1,15 @@
 buildscript {
-	ext {
-		springBootVersion = '2.0.4.RELEASE'
-	}
-	repositories {
-		mavenCentral()
+    ext {
+        springBootVersion = '2.0.4.RELEASE'
+    }
+    repositories {
+        mavenCentral()
         maven { url 'https://plugins.gradle.org/m2/' }
-	}
-	dependencies {
-		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
         classpath('gradle.plugin.com.palantir.gradle.docker:gradle-docker:0.13.0')
-	}
+    }
 }
 
 apply plugin: 'java'
@@ -23,32 +23,30 @@ version = '0.0.1-SNAPSHOT'
 sourceCompatibility = 1.8
 
 repositories {
-	mavenCentral()
+    mavenCentral()
 }
 
 
 dependencies {
-	compile('org.springframework.boot:spring-boot-starter-actuator')
-	compile('org.springframework.boot:spring-boot-starter-data-elasticsearch')
-	compile('org.springframework.boot:spring-boot-starter-data-jpa')
-	compile('org.springframework.boot:spring-boot-starter-data-mongodb')
-	compile('org.springframework.boot:spring-boot-starter-data-rest')
-	compile('org.springframework.boot:spring-boot-starter-security')
-	compile('org.springframework.boot:spring-boot-starter-validation')
-	compile('org.springframework.boot:spring-boot-starter-web')
+    compile('org.springframework.boot:spring-boot-starter-actuator')
+    compile('org.springframework.boot:spring-boot-starter-data-elasticsearch')
+    compile('org.springframework.boot:spring-boot-starter-data-jpa')
+    compile('org.springframework.boot:spring-boot-starter-data-mongodb')
+    compile('org.springframework.boot:spring-boot-starter-data-rest')
+    compile('org.springframework.boot:spring-boot-starter-security')
+    compile('org.springframework.boot:spring-boot-starter-validation')
+    compile('org.springframework.boot:spring-boot-starter-web')
     compile group: 'org.springframework.security.oauth', name: 'spring-security-oauth2', version: '2.3.3.RELEASE'
-	runtime('com.h2database:h2') // Figure out why application can't start without this
-	compileOnly('org.projectlombok:lombok')
+    runtime('com.h2database:h2') // Figure out why application can't start without this
+    compileOnly('org.projectlombok:lombok')
     compileOnly "org.springframework.boot:spring-boot-configuration-processor"
-	compile("com.github.mongobee:mongobee:0.13")
+    compile("com.github.mongobee:mongobee:0.13")
+    compile group: 'org.ostermiller', name: 'utils', version: '1.07.00'
 
-//    compile(group: 'org.docx4j', name: 'docx4j', version: '3.3.5') {
-//        exclude module: "spring-boot-starter-logging"
-//        exclude module: "logback-classic"
-//    }
+    compile 'pl.jsolve:templ4docx:2.0.0'
 
-	testCompile('org.springframework.boot:spring-boot-starter-test')
-	testCompile('org.springframework.security:spring-security-test')
+    testCompile('org.springframework.boot:spring-boot-starter-test')
+    testCompile('org.springframework.security:spring-security-test')
 
     // https://mvnrepository.com/artifact/de.flapdoodle.embed/de.flapdoodle.embed.mongo
     testCompile group: 'de.flapdoodle.embed', name: 'de.flapdoodle.embed.mongo', version: '2.1.1'

@@ -1,22 +1,19 @@
 package com.westernacher.mycv.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
 import java.util.List;
 
+@Data
+@Document
 @NoArgsConstructor
 @AllArgsConstructor
-@Getter
-@Setter
-@Document
-public class Cv {
+public class Resume {
 
     @Id
     private String id;
@@ -29,14 +26,19 @@ public class Cv {
 
     private String summary;
 
-    private List<Experience> experienceList;
+    private List<Experience> experience;
 
-    private List<Skill> skillList;
+    private List<Skill> skills;
 
     private Education education;
 
-    private List<Language> languageList;
+    private List<Language> languages;
 
-    private List<Certificate> certificateList;
+    private List<Certificate> certificates;
+
+    @JsonProperty
+    public String getFullname() {
+        return firstName + " " + lastName;
+    }
 
 }

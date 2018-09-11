@@ -9,3 +9,4 @@ generated
 /back/gradle/*
 /back/gradlew
 /back/gradlew.bat
+/back/data/db/*

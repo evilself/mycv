@@ -33,7 +33,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Bean
     public UserDetailsService userDetailsService() {
-        return new MyCvUserDetailsService();
+        return new ResumeUserDetailsService();
     }
 
     @Override
