@@ -40,7 +40,7 @@ export class MyComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit(): void {
     this.myData$ = this.cvService.getMy().pipe(
-      filter((v: any) => !!v.id),
+      // filter((v: any) => !!v.id),
       share()
     );
   }

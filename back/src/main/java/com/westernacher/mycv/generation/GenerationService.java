@@ -1,6 +1,12 @@
 package com.westernacher.mycv.generation;
 
+import com.westernacher.mycv.model.Resume;
+import org.springframework.core.io.Resource;
+
+import java.util.concurrent.CompletableFuture;
+
 public interface GenerationService {
-//    void generateWordCV() throws Docx4JException, FileNotFoundException;
-//    void generatePowerPointCV() throws Docx4JException, FileNotFoundException;
+
+    CompletableFuture<Resource> generateResumeDocument(Resume resume, DocumentType documentType);
+
 }

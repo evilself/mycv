@@ -14,23 +14,19 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
+
+import static java.util.stream.Collectors.*;
 
 @Primary
 @Service
 @Slf4j
-public class MyCvUserDetailsService implements UserDetailsService {
+public class ResumeUserDetailsService implements UserDetailsService {
 
     @Autowired
     private UserRepository userRepository;
-
-//    @Autowired
-//    public MyCvUserDetailsService(UserRepository userRepository) {
-//        this.userRepository = userRepository;
-//    }
 
     @Override
     @Transactional
@@ -41,13 +37,7 @@ public class MyCvUserDetailsService implements UserDetailsService {
     }
 
     private List<GrantedAuthority> getUserAuthority(Set<UserRole> userRoles) {
-        Set<GrantedAuthority> roles = new HashSet<>();
-        for (UserRole role : userRoles) {
-            roles.add(new SimpleGrantedAuthority(role.name()));
-        }
-
-        List<GrantedAuthority> grantedAuthorities = new ArrayList<>(roles);
-        return grantedAuthorities;
+        return userRoles.stream().map(Enum::name).distinct().map(SimpleGrantedAuthority::new).collect(toList());
     }
 
     private UserDetails buildUserForAuthentication(User user, List<GrantedAuthority> authorities) {

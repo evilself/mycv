@@ -11,7 +11,7 @@
   </mat-sidenav>
   <mat-sidenav-content>
     <mat-toolbar color="primary" class="mat-elevation-z6">
-      <button *ngIf="auth.isAuthenticated" class="menu-button" (click)="sidenav.toggle()" mat-icon-button>
+      <button *ngIf="isAuthenticated$ | async" class="menu-button" (click)="sidenav.toggle()" mat-icon-button>
         <mat-icon>menu</mat-icon>
       </button>
       {{ title$ | async }}

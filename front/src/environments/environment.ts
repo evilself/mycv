@@ -4,7 +4,9 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'https://localhost'
+  apiUrl: 'http://localhost:8080',
+  appId: 'mycv',
+  appSecret: 'spring-security-oauth2-read-client-password1234'
 };
 
 /*

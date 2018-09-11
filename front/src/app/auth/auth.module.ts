@@ -7,18 +7,18 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MaterialModule } from '../material.module';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from './auth.interceptor';
+import { CookieService } from 'ngx-cookie-service';
+import { HttpModule } from '@angular/http';
 
 @NgModule({
-  imports: [CommonModule, FormsModule, ReactiveFormsModule, MaterialModule],
+  imports: [
+    CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MaterialModule,
+    HttpModule
+  ],
   declarations: [LoginComponent],
-  providers: [
-    AuthGuard,
-    AuthService,
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: AuthInterceptor,
-      multi: true
-    }
-  ]
+  providers: [AuthGuard, AuthService, CookieService]
 })
 export class AuthModule {}

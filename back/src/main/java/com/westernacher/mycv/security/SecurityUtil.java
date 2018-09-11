@@ -1,7 +1,6 @@
 package com.westernacher.mycv.security;
 
 import com.westernacher.mycv.repository.UserRepository;
-import com.westernacher.mycv.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
@@ -50,6 +49,12 @@ public class SecurityUtil {
         return Optional.ofNullable(SecurityContextHolder.getContext()
                                                         .getAuthentication())
                        .isPresent();
+    }
+
+    public com.westernacher.mycv.model.User getMycvUser() {
+        org.springframework.security.core.userdetails.User loggedInUser = (org.springframework.security.core.userdetails.User) SecurityContextHolder.getContext().getAuthentication()
+                                                                                                                                                    .getPrincipal();
+        return this.userRepository.findByUserName(loggedInUser.getUsername());
     }
 
     public enum RealmAuthorityEnum {

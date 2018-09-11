@@ -7,7 +7,7 @@ import { environment } from '../../environments/environment';
 
 @Injectable()
 export class CVsService {
-  protected apiUrl = `/api`;
+  protected apiUrl = `${environment.apiUrl}`;
 
   constructor(private http: HttpClient) {}
 
@@ -35,17 +35,18 @@ export class CVsService {
   }
 
   getMy() {
-    return this.http.get(`${this.apiUrl}/my`).pipe(
-      catchError(() =>
-        of({
-          id: 3,
-          dateOfBirth: '11.11.111',
-          firstName: 'Zdravko',
-          lastName: 'Tatarski',
-          email: 'zdravko.tatarski@westernacher.com'
-        }).pipe(delay(2000))
-      )
-    );
+    return this.http.get(`${this.apiUrl}/my`);
+    // .pipe(
+    // catchError(() =>
+    //   of({
+    //     id: 3,
+    //     dateOfBirth: '11.11.111',
+    //     firstName: 'Zdravko',
+    //     lastName: 'Tatarski',
+    //     email: 'zdravko.tatarski@westernacher.com'
+    //   }).pipe(delay(2000))
+    // )
+    // );
   }
 
   getById(id: string) {

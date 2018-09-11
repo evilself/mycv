@@ -6,8 +6,9 @@ import java.util.List;
 
 public interface UserService {
 
-    void createTestData();
-    void deleteUsers();
-    List<User> getAllUsers();
     User getUserById(String id);
+
+    List<User> getAllUsers();
+
+    void deleteUsers();
 }

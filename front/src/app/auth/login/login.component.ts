@@ -21,9 +21,9 @@ export class LoginComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    if (this.auth.isAuthenticated) {
-      this.router.navigate(['']);
-    }
+    // if (this.auth.hasToken()) {
+    //   this.router.navigate(['cv/my']);
+    // }
 
     this.buildForm();
   }
@@ -31,25 +31,27 @@ export class LoginComponent implements OnInit {
   login(form: FormGroup): void {
     this.loading = true;
     this.auth
-      .login(form.value['email'], form.value['password'])
-      .then(() => {
-        this.router.navigate(['/cv/my']);
+      .login({
+        username: form.value['username'],
+        password: form.value['password']
       })
-      .catch(error => {
-        this.snackBar.open(error.message, '', {
-          duration: 4000
-        });
-        this.loading = false;
-      });
+      .subscribe(
+        () => {
+          this.router.navigate(['/cv/my']);
+        },
+        err => {
+          this.snackBar.open(JSON.parse(err._body).error_description, '', {
+            duration: 4000
+          });
+          this.loading = false;
+        }
+      );
   }
 
   buildForm(): void {
     this.loginForm = this.fb.group({
-      email: ['', [Validators.required, Validators.email]],
-      password: [
-        '',
-        [Validators.required, Validators.minLength(6), Validators.maxLength(25)]
-      ]
+      username: ['', [Validators.required]],
+      password: ['', [Validators.required, Validators.maxLength(25)]]
     });
   }
 }

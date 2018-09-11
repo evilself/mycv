@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { filter, map } from 'rxjs/operators';
-import { of, BehaviorSubject } from 'rxjs';
+import { of } from 'rxjs';
 import { AuthService } from './auth/auth.service';
 import { AppLoaderService } from './app-loader.service';
 
@@ -29,7 +29,9 @@ export class AppComponent implements OnInit {
       (event: NavigationEnd) =>
         event.url === '/'
           ? this.navigation.get(event.urlAfterRedirects).title
-          : this.navigation.get(event.url).title
+          : this.navigation.get(event.url)
+            ? this.navigation.get(event.url).title
+            : ''
     )
   );
 
@@ -38,6 +40,8 @@ export class AppComponent implements OnInit {
   );
 
   public loading$ = this.appLoaderService.loading$.asObservable();
+
+  public isAuthenticated$ = this.auth.isAuthenticated.asObservable();
 
   constructor(
     public router: Router,
@@ -48,8 +52,6 @@ export class AppComponent implements OnInit {
   ngOnInit(): void {}
 
   logout() {
-    this.auth.logout().then(() => {
-      this.router.navigate(['/login']);
-    });
+    this.auth.logout().subscribe();
   }
 }
