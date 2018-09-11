@@ -6,13 +6,13 @@ import { catchError } from 'rxjs/operators';
 
 @Injectable()
 export class CVsService {
-  protected apiUrl = ``;
+  protected apiUrl = `/api`;
 
   constructor(private http: HttpClient) { }
 
-  getAll(page: number, size: number, sort: string): Observable<CVListItem[] | Object> {
+  getAll(sort: string): Observable<CVListItem[] | Object> {
     return this.http
-      .get(`${this.apiUrl}?page=${page}&size=${size}&sort=${sort}`)
+      .get(`${this.apiUrl}/cv`)
       .pipe(
       catchError(() =>
         of({

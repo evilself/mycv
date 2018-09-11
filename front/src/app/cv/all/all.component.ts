@@ -25,16 +25,12 @@ import {
 })
 export class AllComponent implements AfterViewInit {
 
-  public page$ = new BehaviorSubject(0);
-  public size$ = new BehaviorSubject(5);
   private sorting$ = new BehaviorSubject('firstName,desc');
   public isLoading$ = new BehaviorSubject(false);
   private resetQ$ = new BehaviorSubject(0);
   public showUserActions$ = new BehaviorSubject(false);
 
   public query$ = combineLatest(
-    this.page$,
-    this.size$,
     this.sorting$,
     this.resetQ$
   ).pipe(
@@ -43,7 +39,7 @@ export class AllComponent implements AfterViewInit {
     }),
     delay(500),
     switchMap(
-      ([page, size, sorting]) => this.cvsService.getAll(page, size, sorting)
+      ([sorting]) => this.cvsService.getAll(sorting)
       // .pipe(catchError(err => of(err)))
     ),
     tap(aa => {
@@ -52,7 +48,7 @@ export class AllComponent implements AfterViewInit {
     share()
   );
 
-  public displayedColumns = ['firstName', 'lastName', 'position', 'actions'];
+  public displayedColumns = ['firstName', 'lastName', 'actions'];
   public dataSource = new MatTableDataSource();
 
   constructor(
@@ -64,9 +60,9 @@ export class AllComponent implements AfterViewInit {
   }
 
   ngAfterViewInit() {
-    this.query$.subscribe((data: GetCVsListResponse) => {
-      if (data.content) {
-        this.dataSource.data = data.content;
+    this.query$.subscribe((data: CVListItem[]) => {
+      if (data) {
+        this.dataSource.data = data;
       } else {
         this.snackBar.open(`There was an error loading the users`, '', {
           duration: 2000

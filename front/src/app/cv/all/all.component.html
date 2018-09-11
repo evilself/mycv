@@ -18,11 +18,6 @@
       <mat-cell *matCellDef="let row"> {{row.lastName}} </mat-cell>
     </ng-container>
 
-    <ng-container matColumnDef="position">
-      <mat-header-cell *matHeaderCellDef mat-sort-header>Position</mat-header-cell>
-      <mat-cell *matCellDef="let row"> {{row.position}} </mat-cell>
-    </ng-container>
-
     <ng-container matColumnDef="actions">
       <mat-header-cell *matHeaderCellDef mat-sort-header></mat-header-cell>
       <mat-cell *matCellDef="let row">
@@ -40,12 +35,12 @@
   </mat-table>
 
   <div class="table-footer">
-    <app-paginator
+    <!-- <app-paginator
       (nextPage)="page$.next($event)"
       (nextSize)="size$.next($event)"
       [pageSize]="size$.getValue()"
       [currentPage]="(query$ | async)?.number"
       [totalPages]="(query$ | async)?.totalPages">
-    </app-paginator>
+    </app-paginator> -->
   </div>
 </div>
