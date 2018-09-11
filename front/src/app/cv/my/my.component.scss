@@ -1,0 +1,32 @@
+.row {
+  display: flex;
+  flex-direction: row;
+  margin: 40px 0;
+  padding: 0 15%;
+}
+
+.column {
+  flex: 1;
+  flex-basis: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+textarea[name='summary'] {
+  resize: none;
+  background-color: rgba(125, 125, 125, 0.1);
+  padding: 0.5em;
+  box-sizing: border-box;
+}
+
+div[name='nameRow'] {
+  mat-form-field {
+    display: block;
+  }
+}
+
+@media all and (max-width: 1200px) {
+  .row {
+    padding: 0 2.5%;
+  }
+}

@@ -5,6 +5,10 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { MaterialModule } from './material.module';
 import { AuthModule } from './auth/auth.module';
+import { AppLoaderService } from './app-loader.service';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { LoggingInterceptor } from './cv/cv.interceptor';
+import { AuthInterceptor } from './auth/auth.interceptor';
 
 @NgModule({
   declarations: [AppComponent],
@@ -15,7 +19,7 @@ import { AuthModule } from './auth/auth.module';
     MaterialModule,
     AuthModule
   ],
-  providers: [],
+  providers: [AppLoaderService],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { filter, map } from 'rxjs/operators';
-import { of } from 'rxjs';
+import { of, BehaviorSubject } from 'rxjs';
 import { AuthService } from './auth/auth.service';
+import { AppLoaderService } from './app-loader.service';
 
 @Component({
   selector: 'app-root',
@@ -18,10 +19,6 @@ export class AppComponent implements OnInit {
     [
       '/cv/all',
       { path: '/cv/all', title: `All CV's`, icon: 'all_inbox', sidebar: true }
-    ],
-    [
-      '/cv/users',
-      { path: '/cv/users', title: `Users`, icon: 'all_inbox', sidebar: true }
     ],
     ['/login', { path: '/login', title: 'Login', menu: false }]
   ]);
@@ -40,7 +37,13 @@ export class AppComponent implements OnInit {
     [...this.navigation.values()].filter(v => v.sidebar)
   );
 
-  constructor(public router: Router, public auth: AuthService) {}
+  public loading$ = this.appLoaderService.loading$.asObservable();
+
+  constructor(
+    public router: Router,
+    public auth: AuthService,
+    private appLoaderService: AppLoaderService
+  ) {}
 
   ngOnInit(): void {}
 

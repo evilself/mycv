@@ -104,7 +104,10 @@ header,
 hgroup,
 menu,
 nav,
-section {
+section,
+h1,
+h2,
+h3 {
   display: block;
 }
 body {
@@ -140,4 +143,31 @@ body {
 
 .container {
   padding: 2rem;
+}
+
+h1 {
+  font-size: 2em;
+  font-weight: bold;
+}
+
+h2 {
+  font-size: 1.5em;
+  font-weight: bold;
+}
+
+h3 {
+  font-size: 1.25em;
+  font-weight: bold;
+}
+
+h4 {
+  font-size: 1.12em;
+}
+
+h5 {
+  font-size: 0.83em;
+}
+
+h6 {
+  font-size: 0.75em;
 }
