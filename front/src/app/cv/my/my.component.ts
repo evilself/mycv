@@ -27,7 +27,8 @@ import {
           opacity: 1
         })
       ),
-      transition('false => true', [animate(750, style({ opacity: 1 }))])
+      transition('false => true', [animate(750, style({ opacity: 1 }))]),
+      transition('true => false', [animate(750, style({ opacity: 0 }))])
     ])
   ]
 })

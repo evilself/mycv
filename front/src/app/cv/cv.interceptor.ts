@@ -15,13 +15,15 @@ export class LoggingInterceptor implements HttpInterceptor {
   constructor(private appLoaderService: AppLoaderService) {}
 
   intercept(req: HttpRequest<any>, next: HttpHandler) {
-    this.appLoaderService.loading$.next(true);
+    setTimeout(() => {
+      this.appLoaderService.loading$.next(true);
+    }, 0);
 
     return next.handle(req).pipe(
       finalize(() => {
         setTimeout(() => {
           this.appLoaderService.loading$.next(false);
-        }, 2000);
+        }, 500);
       })
     );
   }

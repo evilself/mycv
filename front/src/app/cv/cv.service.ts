@@ -12,7 +12,7 @@ export class CVsService {
   constructor(private http: HttpClient) {}
 
   getAll(sort: string): Observable<CVListItem[] | Object> {
-    return this.http.get(`${this.apiUrl}/cv`).pipe(
+    return this.http.get(`${this.apiUrl}/resume`).pipe(
       catchError(() =>
         of([
           {
