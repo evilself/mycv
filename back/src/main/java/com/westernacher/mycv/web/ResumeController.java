@@ -55,20 +55,18 @@ public class ResumeController {
         ), "resumes.zip");
     }
 
-    //TODO delete me
+    //TODO delete me on Friday
     @GetMapping(value = "/create")
     @ResponseStatus(value = HttpStatus.OK)
-    public String createResumesForTest() {
+    public void createResumesForTest() {
         this.resumeService.createTestData();
-        return "ok";
     }
 
-    //TODO delete me
+    //TODO delete me on Friday
     @GetMapping(value = "/deleteall")
     @ResponseStatus(value = HttpStatus.NO_CONTENT)
-    public String deleteAll() {
+    public void deleteAll() {
         this.resumeService.deleteAll();
-        return "ok";
     }
 
     private static ResponseEntity<Resource> buildResourceResponse(Resource file, String fileName) {
