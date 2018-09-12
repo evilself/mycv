@@ -7,6 +7,7 @@ import org.docx4j.openpackaging.packages.PresentationMLPackage;
 import org.docx4j.openpackaging.packages.WordprocessingMLPackage;
 import org.docx4j.wml.ContentAccessor;
 import org.docx4j.wml.Text;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.core.io.Resource;
 import org.springframework.scheduling.annotation.Async;
@@ -201,11 +202,14 @@ public class GenerationUtils {
         template.save(new File(target));
     }
 
-    public OpcPackage getTemplate(String name, String type)
-            throws Docx4JException, FileNotFoundException {
+    public OpcPackage getTemplate(String name, String type) throws Docx4JException, IOException {
         switch(type) {
-            case "WORD":{ return WordprocessingMLPackage
-                    .load(new FileInputStream(ClassLoader.class.getResource(name).getFile())); }
+            case "WORD":{
+                Resource resource = new ClassPathResource(name);
+                BufferedReader reader = new BufferedReader(new InputStreamReader(resource.getInputStream()));
+
+                return WordprocessingMLPackage
+                    .load(resource.getInputStream()); }
             case "POWERPOINT": {
                 return PresentationMLPackage.load(new FileInputStream(new File(name)));
             }

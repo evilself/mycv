@@ -62,7 +62,7 @@ public class OfficeGenerationService implements GenerationService {
     }
 
     @Override
-    public void generatePowerPointCV() throws Docx4JException, FileNotFoundException{
+    public void generatePowerPointCV() throws Docx4JException, IOException {
         PresentationMLPackage packagePP =  (PresentationMLPackage) generationUtils.getTemplate("", "POWERPOINT");
     }
 
