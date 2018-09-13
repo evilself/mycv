@@ -16,7 +16,7 @@ import java.util.List;
 import static java.util.stream.Collectors.toList;
 
 @RestController
-@RequestMapping(path = "/resume", produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(path = "/resumes", produces = MediaType.APPLICATION_JSON_VALUE)
 public class ResumeController {
 
     @Autowired
