@@ -27,7 +27,10 @@ export class AuthInterceptor implements HttpInterceptor {
       catchError(err => {
         if (err instanceof HttpErrorResponse) {
           if (err.status === 401) {
+            // if (sessionStorage.getItem('refresh_token')) {
+            // } else {
             this.auth.cleanup();
+            // }
           }
         }
 

@@ -4,11 +4,36 @@ import { filter, map } from 'rxjs/operators';
 import { of } from 'rxjs';
 import { AuthService } from './auth/auth.service';
 import { AppLoaderService } from './app-loader.service';
+import {
+  trigger,
+  state,
+  style,
+  animate,
+  transition
+} from '@angular/animations';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  styleUrls: ['./app.component.scss'],
+  animations: [
+    trigger('loaderState', [
+      state(
+        'false',
+        style({
+          opacity: 0
+        })
+      ),
+      state(
+        'true',
+        style({
+          opacity: 1
+        })
+      ),
+      transition('false => true', [animate(250, style({ opacity: 1 }))]),
+      transition('true => false', [animate(250, style({ opacity: 0 }))])
+    ])
+  ]
 })
 export class AppComponent implements OnInit {
   private navigation = new Map([

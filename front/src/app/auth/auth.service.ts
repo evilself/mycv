@@ -17,7 +17,7 @@ import { environment } from '../../environments/environment';
   providedIn: 'root'
 })
 export class AuthService {
-  isAuthenticated = new BehaviorSubject(this.hasToken() || false);
+  isAuthenticated = new BehaviorSubject(this.hasToken());
 
   constructor(
     private http: Http,
@@ -55,6 +55,7 @@ export class AuthService {
     const expireDate = new Date().getTime() + 1000 + token.expires_in;
 
     this.cookieService.set('access_token', token.access_token, expireDate);
+    sessionStorage.setItem('refresh_token', token.refresh_token);
   }
 
   getAuthToken() {

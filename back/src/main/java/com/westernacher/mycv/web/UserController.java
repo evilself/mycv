@@ -27,11 +27,10 @@ public class UserController {
         return ResponseEntity.ok(this.userService.getUserById(id));
     }
 
-    //TODO delete me
+    //TODO delete me on Friday
     @GetMapping(value = "/deleteall")
     @ResponseStatus(value = HttpStatus.NO_CONTENT)
-    public String deleteall() {
+    public void deleteall() {
         this.userService.deleteUsers();
-        return "redirect:/users";
     }
 }

@@ -16,7 +16,7 @@
       </button>
       {{ title$ | async }}
     </mat-toolbar>
-    <div *ngIf="loading$ | async" class="loader">
+    <div [@loaderState]="loading$ | async" class="loader">
       <mat-progress-bar color="accent" mode="indeterminate"></mat-progress-bar>
       <mat-spinner color="accent" diameter="30"></mat-spinner>
     </div>

@@ -68,6 +68,7 @@ public class DefaultResumeService implements ResumeService {
     @Override
     @PreAuthorize("hasAuthority('ADMIN')")
     public void createTestData() {
+        this.resumeRepository.deleteAll();
         List<User> users = this.userRepository.findAll();
         users.forEach(u -> {
 
