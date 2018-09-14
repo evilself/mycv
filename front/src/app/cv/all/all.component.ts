@@ -80,36 +80,6 @@ export class AllComponent implements AfterViewInit {
     this.sorting$.next(`${sort.active},${sort.direction}`);
   }
 
-  confirmDeleteDialog(data: CVListItem) {
-    const deleteDialogRef = this.dialog.open(DeleteDialogComponent, {
-      data: data.id
-    });
-
-    deleteDialogRef
-      .afterClosed()
-      .pipe(
-        filter(result => result),
-        switchMap(() => this.cvsService.delete(data))
-      )
-      .subscribe(
-        () => {
-          this.snackBar.open(`Deleted user: #${data.id}`, '', {
-            duration: 2000
-          });
-          this.resetQ$.next(1);
-        },
-        () => {
-          this.snackBar.open(
-            `There was an error when trying to delete this user`,
-            '',
-            {
-              duration: 2000
-            }
-          );
-        }
-      );
-  }
-
   navigateToAddEdit(data: CVListItem) {
 
   }

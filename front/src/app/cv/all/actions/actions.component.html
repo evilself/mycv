@@ -2,9 +2,6 @@
   <button (click)="$event.stopPropagation(); addEditUser.emit(data)" mat-icon-button>
     <mat-icon>mode_edit</mat-icon>
   </button>
-  <button (click)="$event.stopPropagation(); deleteUser.emit(data)" color="warn" mat-icon-button>
-    <mat-icon>delete</mat-icon>
-  </button>
   <button (click)="$event.stopPropagation(); generateCV.emit(data)" mat-icon-button>
     <mat-icon>cloud_download</mat-icon>
   </button>

@@ -22,7 +22,6 @@
       <mat-cell *matCellDef="let row">
         <app-actions [data]="row" [showUserActions]="true"
           (addEditUser)="navigateToAddEdit($event)"
-          (deleteUser)="confirmDeleteDialog($event)"
           (generateCV)="generateCVDocument($event)">
         </app-actions>
       </mat-cell>

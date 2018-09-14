@@ -12,7 +12,6 @@ export class ActionsComponent implements OnInit {
   @Input() showUserActions: boolean;
 
   @Output() addEditUser: EventEmitter<CVListItem> = new EventEmitter();
-  @Output() deleteUser: EventEmitter<CVListItem> = new EventEmitter();
   @Output() generateCV: EventEmitter<CVListItem> = new EventEmitter();
 
   constructor() { }
