@@ -8,7 +8,6 @@ import {
   Http,
   Headers
 } from '@angular/http';
-import { CookieService } from 'ngx-cookie-service';
 import { Router } from '@angular/router';
 import { of, BehaviorSubject, throwError } from 'rxjs';
 import { environment } from '../../environments/environment';
@@ -22,15 +21,13 @@ export enum GrandType {
 })
 export class AuthService {
   currentUser$ = new BehaviorSubject(
-    JSON.parse(sessionStorage.getItem('current_user')) || null
+    JSON.parse(localStorage.getItem('current_user')) || null
   );
-  isAuthenticated$ = this.currentUser$.pipe(map(user => !!user));
+  isAuthenticated$ = this.currentUser$.pipe(
+    map(user => !!user && this.hasToken())
+  );
 
-  constructor(
-    private http: Http,
-    private cookieService: CookieService,
-    private router: Router
-  ) {}
+  constructor(private http: Http, private router: Router) {}
 
   login(loginData) {
     const { params, options } = this.requestBuilder(
@@ -44,21 +41,20 @@ export class AuthService {
         map(res => res.json()),
         tap(res => {
           this.saveToken(res, loginData);
-          this.router.navigate(['/cv/my']);
         })
       );
   }
 
   refreshToken() {
     if (
-      !sessionStorage.getItem('login_data') &&
-      !sessionStorage.getItem('current_user')
+      !sessionStorage.getItem('login_data') ||
+      !localStorage.getItem('current_user')
     ) {
       return throwError('no data in sessionStorage');
     }
 
     const loginData = JSON.parse(sessionStorage.getItem('login_data'));
-    const refreshToken = JSON.parse(sessionStorage.getItem('current_user'))
+    const refreshToken = JSON.parse(localStorage.getItem('current_user'))
       .refresh_token;
 
     const { params, options } = this.requestBuilder(
@@ -82,10 +78,9 @@ export class AuthService {
   }
 
   saveToken(token, loginData?) {
+    localStorage.setItem('access_token', token.access_token);
+    localStorage.setItem('current_user', JSON.stringify(token));
     this.currentUser$.next(token);
-    const expireDate = new Date().getTime() + 1000 + token.expires_in;
-    this.cookieService.set('access_token', token.access_token, expireDate);
-    sessionStorage.setItem('current_user', JSON.stringify(token));
 
     if (loginData) {
       sessionStorage.setItem('login_data', JSON.stringify(loginData));
@@ -93,11 +88,11 @@ export class AuthService {
   }
 
   getAuthToken() {
-    return 'Bearer ' + this.cookieService.get('access_token');
+    return 'Bearer ' + localStorage.getItem('access_token');
   }
 
   hasToken() {
-    return this.cookieService.check('access_token');
+    return !!localStorage.getItem('access_token');
   }
 
   logout() {
@@ -117,8 +112,8 @@ export class AuthService {
 
   cleanup() {
     this.currentUser$.next(null);
-    this.cookieService.delete('access_token', '/');
     sessionStorage.clear();
+    localStorage.clear();
     this.router.navigate(['/login']);
   }
 

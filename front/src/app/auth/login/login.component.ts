@@ -22,6 +22,10 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
     this.buildForm();
+
+    if (this.auth.currentUser$.getValue() && this.auth.hasToken()) {
+      this.router.navigate(['/cv/my']);
+    }
   }
 
   login(form: FormGroup): void {

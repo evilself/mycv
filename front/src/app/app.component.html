@@ -19,7 +19,8 @@
       </div>
       <div class="end">
         <mat-chip-list class="current-user">
-          <mat-chip *ngIf="!!(currentUser$ | async)"> {{ (currentUser$ | async)?.username }}</mat-chip>
+          <mat-chip *ngIf="!!(currentUser$ | async) && isAuthenticated$ | async"> {{ (currentUser$ | async)?.username
+            }}</mat-chip>
         </mat-chip-list>
       </div>
     </mat-toolbar>

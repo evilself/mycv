@@ -7,7 +7,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MaterialModule } from '../material.module';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from './auth.interceptor';
-import { CookieService } from 'ngx-cookie-service';
 import { HttpModule } from '@angular/http';
 
 @NgModule({
@@ -19,6 +18,6 @@ import { HttpModule } from '@angular/http';
     HttpModule
   ],
   declarations: [LoginComponent],
-  providers: [AuthGuard, AuthService, CookieService]
+  providers: [AuthGuard, AuthService]
 })
 export class AuthModule {}
