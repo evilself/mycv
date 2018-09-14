@@ -21,10 +21,6 @@ export class LoginComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    // if (this.auth.hasToken()) {
-    //   this.router.navigate(['cv/my']);
-    // }
-
     this.buildForm();
   }
 
@@ -40,7 +36,7 @@ export class LoginComponent implements OnInit {
           this.router.navigate(['/cv/my']);
         },
         err => {
-          this.snackBar.open(JSON.parse(err._body).error_description, '', {
+          this.snackBar.open('There was an error while logging in', '', {
             duration: 4000
           });
           this.loading = false;

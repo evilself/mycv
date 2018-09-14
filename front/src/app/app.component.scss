@@ -35,3 +35,17 @@ mat-sidenav {
     position: absolute;
   }
 }
+
+mat-toolbar {
+  justify-content: space-between;
+}
+
+.start,
+.end {
+  display: flex;
+  align-items: center;
+}
+
+.current-user {
+  font-weight: bold;
+}

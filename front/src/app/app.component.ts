@@ -39,11 +39,23 @@ export class AppComponent implements OnInit {
   private navigation = new Map([
     [
       '/cv/my',
-      { path: '/cv/my', title: 'My CV', icon: 'assignment_ind', sidebar: true }
+      {
+        path: '/cv/my',
+        title: 'My CV',
+        icon: 'assignment_ind',
+        sidebar: true,
+        authority: ['USER', 'ADMIN']
+      }
     ],
     [
       '/cv/all',
-      { path: '/cv/all', title: `All CV's`, icon: 'all_inbox', sidebar: true }
+      {
+        path: '/cv/all',
+        title: `All CV's`,
+        icon: 'all_inbox',
+        sidebar: true,
+        authority: ['ADMIN']
+      }
     ],
     ['/login', { path: '/login', title: 'Login', menu: false }]
   ]);
@@ -60,13 +72,19 @@ export class AppComponent implements OnInit {
     )
   );
 
-  public navigationItems$ = of(
-    [...this.navigation.values()].filter(v => v.sidebar)
-  );
-
   public loading$ = this.appLoaderService.loading$.asObservable();
 
-  public isAuthenticated$ = this.auth.isAuthenticated.asObservable();
+  public isAuthenticated$ = this.auth.isAuthenticated$;
+  public currentUser$ = this.auth.currentUser$;
+  public navigationItems$ = this.currentUser$.pipe(
+    filter(user => !!user),
+    map(user => user.authorities[0].authority),
+    map(authority =>
+      [...this.navigation.values()].filter(
+        v => v.sidebar && v.authority.includes(authority)
+      )
+    )
+  );
 
   constructor(
     public router: Router,

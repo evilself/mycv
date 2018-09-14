@@ -16,6 +16,7 @@ import {
   MatSelectModule,
   MatProgressBarModule
 } from '@angular/material';
+import { MatChipsModule } from '@angular/material/chips';
 
 const MODULES = [
   MatInputModule,
@@ -32,7 +33,8 @@ const MODULES = [
   MatDialogModule,
   MatSortModule,
   MatSelectModule,
-  MatProgressBarModule
+  MatProgressBarModule,
+  MatChipsModule
 ];
 
 @NgModule({

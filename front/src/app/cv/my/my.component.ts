@@ -8,6 +8,7 @@ import {
   animate,
   transition
 } from '@angular/animations';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-my',
@@ -33,16 +34,13 @@ import {
   ]
 })
 export class MyComponent implements OnInit, AfterViewInit {
-  myData$;
+  myData$: Observable<any>;
 
   constructor(private cvService: CVsService) {}
 
   ngOnInit() {}
 
   ngAfterViewInit(): void {
-    this.myData$ = this.cvService.getMy().pipe(
-      // filter((v: any) => !!v.id),
-      share()
-    );
+    this.myData$ = this.cvService.getMy().pipe(share());
   }
 }

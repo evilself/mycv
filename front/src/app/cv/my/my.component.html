@@ -25,7 +25,7 @@
     </div>
     <div class="column">
       <div class="item">
-        <textarea matInput name="summary" placeholder="Summary" rows="5"></textarea>
+        <textarea matInput name="summary" placeholder="Summary" rows="5" [value]="(myData$ | async)?.summary"></textarea>
       </div>
     </div>
   </div>

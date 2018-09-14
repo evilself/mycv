@@ -11,10 +11,17 @@
   </mat-sidenav>
   <mat-sidenav-content>
     <mat-toolbar color="primary" class="mat-elevation-z6">
-      <button *ngIf="isAuthenticated$ | async" class="menu-button" (click)="sidenav.toggle()" mat-icon-button>
-        <mat-icon>menu</mat-icon>
-      </button>
-      {{ title$ | async }}
+      <div class="start">
+        <button *ngIf="isAuthenticated$ | async" class="menu-button" (click)="sidenav.toggle()" mat-icon-button>
+          <mat-icon>menu</mat-icon>
+        </button>
+        {{ title$ | async }}
+      </div>
+      <div class="end">
+        <mat-chip-list class="current-user">
+          <mat-chip *ngIf="!!(currentUser$ | async)"> {{ (currentUser$ | async)?.username }}</mat-chip>
+        </mat-chip-list>
+      </div>
     </mat-toolbar>
     <div [@loaderState]="loading$ | async" class="loader">
       <mat-progress-bar color="accent" mode="indeterminate"></mat-progress-bar>
