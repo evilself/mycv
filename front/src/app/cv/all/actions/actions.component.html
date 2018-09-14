@@ -1,12 +1,11 @@
 <div *ngIf="showUserActions" class="actions-container">
-  <button (click)="addEditUser.emit(data)" mat-icon-button>
+  <button (click)="$event.stopPropagation(); addEditUser.emit(data)" mat-icon-button>
     <mat-icon>mode_edit</mat-icon>
   </button>
-  <button (click)="deleteUser.emit(data)" color="warn" mat-icon-button>
+  <button (click)="$event.stopPropagation(); deleteUser.emit(data)" color="warn" mat-icon-button>
     <mat-icon>delete</mat-icon>
   </button>
+  <button (click)="$event.stopPropagation(); generateCV.emit(data)" mat-icon-button>
+    <mat-icon>cloud_download</mat-icon>
+  </button>
 </div>
-
-<button id="add-fab" (click)="addEditUser.emit()" color="light" mat-fab>
-  <mat-icon>add</mat-icon>
-</button>

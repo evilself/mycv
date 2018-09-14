@@ -12,7 +12,7 @@ export class CVsService {
   constructor(private http: HttpClient) {}
 
   getAll(sort: string): Observable<CVListItem[] | Object> {
-    return this.http.get(`${this.apiUrl}/resume`).pipe(
+    return this.http.get(`${this.apiUrl}/resumes`).pipe(
       catchError(() =>
         of([
           {
@@ -50,7 +50,7 @@ export class CVsService {
   }
 
   getById(id: string) {
-    return this.http.get(`${this.apiUrl}/${id}`).pipe(
+    return this.http.get(`${this.apiUrl}/resumes/${id}`).pipe(
       catchError(() =>
         of({
           id: 3,
@@ -65,5 +65,9 @@ export class CVsService {
 
   delete(cvData: CVListItem) {
     return this.http.delete(`${this.apiUrl}/${cvData.id}`);
+  }
+
+  generateDocument(cvData: CVListItem) {
+    return this.http.get(`${this.apiUrl}/resumes/${cvData.id}/document`, { responseType: 'blob' });
   }
 }

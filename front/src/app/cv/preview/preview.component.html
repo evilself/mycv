@@ -28,9 +28,26 @@
     </div>
     <div class="column">
       <div class="item">
-        <div *ngFor="let project of (previewData$ | async)?.projects">
-          {{ project }}
+        <div *ngFor="let experience of (previewData$ | async)?.experience">
+          <h4>{{ experience.title }}</h4>
+          <h5>{{ experience.company }} | {{ experience.startDate | date }} - {{ experience.stillEmpoyed ? 'now' : (experience.endDate | date) }}</h5>
+          <p>{{ experience.description }}</p>
         </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="column">
+      <div class="item">
+        <h3>Skills</h3>
+      </div>
+    </div>
+    <div class="column">
+      <div class="item">
+        <span *ngFor="let skill of (previewData$ | async)?.skills">
+          {{ skill.skill }} ,
+        </span>
       </div>
     </div>
   </div>
@@ -43,9 +60,8 @@
     </div>
     <div class="column">
       <div class="item">
-        <div *ngFor="let education of (previewData$ | async)?.education">
-          {{ education }}
-        </div>
+        <h4>{{ (previewData$ | async)?.education.details }}</h4>
+        <h5>{{ (previewData$ | async)?.education.startDate | date }} - {{ (previewData$ | async)?.education.endDate | date }}</h5>
       </div>
     </div>
   </div>
@@ -59,7 +75,7 @@
     <div class="column">
       <div class="item">
         <div *ngFor="let language of (previewData$ | async)?.languages">
-          {{ language }}
+          <p>{{ language.language }} ({{language.level}})</p>
         </div>
       </div>
     </div>
@@ -74,7 +90,8 @@
     <div class="column">
       <div class="item">
         <div *ngFor="let certificate of (previewData$ | async)?.certificates">
-          {{ certificate }}
+          <h4>{{ certificate.certificate }}</h4>
+          <p>{{ certificate.details }}</p>
         </div>
       </div>
     </div>

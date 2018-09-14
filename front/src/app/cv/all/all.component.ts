@@ -117,4 +117,14 @@ export class AllComponent implements AfterViewInit {
   navigateToPreview(data: CVListItem) {
     this.router.navigate(['cv', 'preview', data.id]);
   }
+
+  generateCVDocument(data: CVListItem) {
+    this.cvsService.generateDocument(data).subscribe(result => {
+      const url = window.URL.createObjectURL(result);
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = `${data.firstName}_${data.lastName}_CV.docx`;
+      link.click();
+    });
+  }
 }
